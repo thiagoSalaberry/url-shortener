@@ -28,11 +28,11 @@ const AnimatedText = ({children}:{children:string}) => {
                     return <span className={`${styles.span} ${index % 2 == 0 ? styles.top : styles.bottom}`} key={index} style={{animationDelay: `${index * 0.1}s`}}>{char}</span>
                 })
             }</p>
-            <Button type="main">Main Button</Button>
-            <Button type="secondary">Secondary Button</Button>
-            <Button type="mainIcon"><CopyIcon size={16}/></Button>
-            <Button type="mainIcon"><ExternalIcon size={20}/></Button>
-            <Button type="secondaryIcon">Main Button</Button>
+            <Button type="button" onClick={()=>{}} style="main">Main Button</Button>
+            <Button type="button" onClick={()=>{}} style="secondary">Secondary Button</Button>
+            <Button type="button" onClick={()=>{}} style="mainIcon"><CopyIcon size={16}/></Button>
+            <Button type="button" onClick={()=>{}} style="mainIcon"><ExternalIcon size={20}/></Button>
+            <Button type="button" onClick={()=>{}} style="secondaryIcon">Main Button</Button>
             <Input type="text" name="test" value={test} missing={missing} disabled={submitting} placeholder="Place your long URL here..." onChange={(value)=>handleChange(value)}/>
             <UrlResult result="http://localhost:3000/xMBENA"/>
         </main>

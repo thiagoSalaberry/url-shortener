@@ -1,9 +1,7 @@
 import { useState } from "react";
-const API_BASE_URL = process.env.API_BASE_URL;
+const BASE_URL = process.env.BASE_URL;
 const URL_TO_CALL =
-  process.env.NODE_ENV == "development"
-    ? "http://localhost:3000"
-    : API_BASE_URL;
+  process.env.NODE_ENV == "development" ? "http://localhost:3000" : BASE_URL;
 
 export function useCreateUrl() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
