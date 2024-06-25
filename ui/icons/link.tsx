@@ -1,0 +1,19 @@
+import ExternalLink from "./external-link.svg";
+type IconProps = {
+    size:number;
+    className?:string;
+}
+export function ExternalIcon(props:IconProps) {
+    return (
+        <svg
+            width={props.size.toString()}
+            height={props.size.toString()}
+            viewBox="0 0 18 18"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+        >
+            <path d="M18 8V0H10V2H14V4H12V6H10V8H8V10H6V12H8V10H10V8H12V6H14V4H16V8H18ZM8 2H0V18H16V10H14V16H2V4H8V2Z" fill="black"/>
+        </svg>
+
+    )
+}

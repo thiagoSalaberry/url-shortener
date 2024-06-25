@@ -1,0 +1,22 @@
+.loading {
+    display: flex;
+    justify-content: center;
+}
+@keyframes loading {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+.dot {
+    color: rgb(85, 85, 85);
+    animation: loading 1s infinite;
+}
+.dot:nth-child(2) {
+    animation-delay: .2s;
+}
+.dot:last-child {
+    animation-delay: .4s;
+}

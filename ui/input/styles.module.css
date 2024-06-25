@@ -1,0 +1,21 @@
+.input {
+    font-size: 26px;
+    width: 600px;
+    border: 2px solid rgb(15, 15, 15);
+    border-radius: 5px;
+    padding: 8px 20px;
+    box-shadow: -2px 2px 0 0 rgb(15, 15, 15);
+    transition: all .2s;
+}
+.input:focus {
+    outline: none;
+    box-shadow: -4px 4px 0 0 rgb(15, 15, 15);
+    transform: translate(2px, -2px);
+}
+.input.missing {
+    border: 2px solid rgb(224, 59, 59);
+    box-shadow: -2px 2px 0 0 rgb(224, 59, 59);
+}
+.input.missing:focus {
+    box-shadow: -4px 4px 0 0 rgb(224, 59, 59);
+}

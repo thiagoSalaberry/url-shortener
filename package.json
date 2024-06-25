@@ -9,16 +9,24 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "concurrently": "^8.2.2",
+    "copy-to-clipboard": "^3.3.3",
+    "crypto-random-string": "^5.0.0",
+    "next": "14.2.4",
+    "pg": "^8.12.0",
+    "pg-hstore": "^2.3.4",
+    "pixelarticons": "1.8.0",
     "react": "^18",
     "react-dom": "^18",
-    "next": "14.2.4"
+    "styled-components": "^6.1.11"
   },
   "devDependencies": {
-    "typescript": "^5",
     "@types/node": "^20",
+    "@types/pg": "^8.11.6",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "eslint": "^8",
-    "eslint-config-next": "14.2.4"
+    "eslint-config-next": "14.2.4",
+    "typescript": "^5"
   }
 }
