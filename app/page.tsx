@@ -18,8 +18,6 @@ const URL_TO_CALL =
   process.env.NODE_ENV == "production"
     ? BASE_URL
     : "http://localhost:3000"
-    
-console.log(BASE_URL);
 export default function Home() {
   const {longUrl, setLongUrl, missing, setMissing, submitting, setSubmitting} = useForm()
   const {isLoading, error, data, createUrl} = useCreateUrl();
@@ -59,7 +57,7 @@ export default function Home() {
           {isLoading ? <Loading/> : error ? "Server error occurred" : data ? <span><ArrowIcon size={14} color="#46d21b"/> Here is your shortened URL <ArrowIcon size={14} color="#46d21b"/></span> : null}
         </p>
         <div className={styles.result_container}>
-          <UrlResult result={data && !isLoading ? `${URL_TO_CALL}/${data.url}` : ""}/>
+          <UrlResult result={data && !isLoading ? data.url : ""}/>
           <Button type="button" style="mainIcon" onClick={()=>{data && copy(`${URL_TO_CALL}/${data.url}`)}}><CopyIcon size={16}/></Button>
           <Button type="button" style="mainIcon" onClick={()=>data && router.push(data?.url)}><ExternalIcon size={20}/></Button>
         </div>
