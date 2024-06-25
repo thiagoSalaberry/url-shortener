@@ -1,6 +1,7 @@
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
+// const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
+const BASE_URL = "https://teoxys-url.vercel.app";
 const URL_TO_CALL =
-  process.env.NODE_ENV == "development" ? "http://localhost:3000" : BASE_URL;
+  process.env.NODE_ENV == "production" ? BASE_URL : "http://localhost:3000";
 
 export const createURL = async (originalUrl: string): Promise<any> => {
   try {

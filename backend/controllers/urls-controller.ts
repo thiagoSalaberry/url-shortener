@@ -1,9 +1,10 @@
 import { Urls } from "../models/urls";
 import { pool } from "../models/db";
 import { generateRandomURL } from "@/lib/generateRandomURL";
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
+// const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
+const BASE_URL = "https://teoxys-url.vercel.app";
 const URL_TO_CALL =
-  process.env.NODE_ENV == "development" ? "http://localhost:3000" : BASE_URL;
+  process.env.NODE_ENV == "production" ? BASE_URL : "http://localhost:3000";
 
 export class UrlsController {
   static async init(): Promise<void> {
