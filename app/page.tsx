@@ -14,7 +14,7 @@ import { Loading, UrlResult } from "@/components";
 import { Input, Button, ArrowIcon, CopyIcon, ExternalIcon } from "@/ui";
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 const URL_TO_CALL =
-  process.env.NODE_ENV == "production"
+  process.env.NODE_ENV !== "production"
     ? BASE_URL
     : "http://localhost:3000"
     
