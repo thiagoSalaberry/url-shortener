@@ -1,5 +1,5 @@
 import { useState } from "react";
-const BASE_URL = process.env.BASE_URL;
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 const URL_TO_CALL =
   process.env.NODE_ENV == "development" ? "http://localhost:3000" : BASE_URL;
 
