@@ -8,7 +8,7 @@ const nextConfig = {
   reactStrictMode: true,
 };
 
-module.exports = {
+export default {
   ...nextConfig,
   async headers() {
     return [
