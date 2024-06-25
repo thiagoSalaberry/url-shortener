@@ -12,12 +12,13 @@ import { vt323, pressStart2p } from "@/lib/fonts";
 import { Loading, UrlResult } from "@/components";
 /* UI ATOMS */
 import { Input, Button, ArrowIcon, CopyIcon, ExternalIcon } from "@/ui";
-const BASE_URL = process.env.BASE_URL;
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 const URL_TO_CALL =
-  process.env.NODE_ENV == "development"
-    ? "http://localhost:3000"
-    : BASE_URL;
-
+  process.env.NODE_ENV == "production"
+    ? BASE_URL
+    : "http://localhost:3000"
+    
+console.log(BASE_URL);
 export default function Home() {
   const {longUrl, setLongUrl, missing, setMissing, submitting, setSubmitting} = useForm()
   const {isLoading, error, data, createUrl} = useCreateUrl();
