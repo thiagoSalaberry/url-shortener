@@ -1,0 +1,38 @@
+.ui_page {
+    display: grid;
+    height: 100vh;
+    place-content: center;
+}
+@keyframes appearTop {
+    from {
+        transform: translateY(100%);
+    }
+    to {
+        transform: translateY(0%);
+    }
+}
+@keyframes appearBottom {
+    from {
+        transform: translateY(-100%);
+    }
+    to {
+        transform: translateY(0%);
+    }
+}
+.animated_text {
+    font-size: 30px;
+    position: relative;
+    display: flex;
+    overflow: hidden;
+}
+.span {
+    position: relative;
+}
+.span.top {
+    animation: appearTop .1s forwards;
+    transform: translateY(100%);
+}
+.span.bottom {
+    animation: appearBottom .1s forwards;
+    transform: translateY(-100%);
+}

@@ -1,5 +1,4 @@
 import { pool } from "./db";
-
 export class Urls {
   static async createTable() {
     try {

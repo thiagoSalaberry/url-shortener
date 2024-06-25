@@ -1,95 +1,66 @@
-import Image from "next/image";
+"use client";
 import styles from "./page.module.css";
+/* HOOKS */
+import { useRouter } from "next/navigation";
+import { useForm } from "@/lib/hooks/useForm";
+import { useCreateUrl } from "@/lib/hooks/useCreateUrl";
+/* UTILITIES */
+import copy from "copy-to-clipboard";
+/* FONTS */
+import { vt323, pressStart2p } from "@/lib/fonts";
+/* COMPONENTS */
+import { Loading, UrlResult } from "@/components";
+/* UI ATOMS */
+import { Input, Button, ArrowIcon, CopyIcon, ExternalIcon } from "@/ui";
+const API_BASE_URL = process.env.API_BASE_URL;
+const URL_TO_CALL =
+  process.env.NODE_ENV == "development"
+    ? "http://localhost:3000"
+    : API_BASE_URL;
 
 export default function Home() {
+  const {longUrl, setLongUrl, missing, setMissing, submitting, setSubmitting} = useForm()
+  const {isLoading, error, data, createUrl} = useCreateUrl();
+  const router = useRouter()
+  const handleSubmit = async (e:React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    createUrl(longUrl)
+  }
+  const handleInvalid = (e:React.FormEvent<HTMLFormElement>):void => {
+    e.preventDefault();
+    setMissing(true)
+  }
+  const handleChange = (value:string):void => {
+    setLongUrl(value)
+    setMissing(false)
+  }
   return (
     <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>app/page.tsx</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
+      <h1 className={`${styles.title} ${pressStart2p.className}`}>TEOXYS URL SHORTENER</h1>
+      <h3 className={`${styles.subtitle} ${pressStart2p.className}`}>The quickest and coolest, worldwide.</h3>
+      <section className={styles.content}>
+        <form onInvalid={handleInvalid} onSubmit={handleSubmit} className={styles.creation_form}>
+          <Input
+            type="text"
+            name="long_url"
+            value={longUrl}
+            onChange={(value)=>handleChange(value)}
+            placeholder="Place your long URL here..."
+            required={true}
+            missing={missing}
+            disabled={submitting}
             />
-          </a>
+          <Button onClick={()=>handleSubmit} type="submit" style="main" disabled={submitting}>Shorten URL</Button>
+        </form>
+        <p className={`${styles.info_message} ${isLoading && styles.loading} ${missing && styles.missing} ${error && styles.error} ${data && !isLoading && styles.success} ${vt323.className}`}>
+          {isLoading ? <Loading/> : error ? "Server error occurred" : data ? <span><ArrowIcon size={14} color="#46d21b"/> Here is your shortened URL <ArrowIcon size={14} color="#46d21b"/></span> : null}
+        </p>
+        <div className={styles.result_container}>
+          <UrlResult result={data && !isLoading ? `${URL_TO_CALL}/${data.url}` : ""}/>
+          <Button type="button" style="mainIcon" onClick={()=>{data && copy(`${URL_TO_CALL}/${data.url}`)}}><CopyIcon size={16}/></Button>
+          <Button type="button" style="mainIcon" onClick={()=>data && router.push(data?.url)}><ExternalIcon size={20}/></Button>
         </div>
-      </div>
-
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore starter templates for Next.js.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
+      </section>
     </main>
   );
 }

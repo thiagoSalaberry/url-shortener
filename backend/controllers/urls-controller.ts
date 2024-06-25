@@ -1,7 +1,10 @@
 import { Urls } from "../models/urls";
 import { pool } from "../models/db";
 import { generateRandomURL } from "@/lib/generateRandomURL";
-const BASE_URL = process.env.BASE_URL;
+const BASE_URL = process.env.API_BASE_URL;
+const URL_TO_CALL =
+  process.env.NODE_ENV == "development" ? "http://localhost:3000" : BASE_URL;
+
 export class UrlsController {
   static async init(): Promise<void> {
     try {
@@ -56,7 +59,7 @@ export class UrlsController {
       );
       return {
         status: 1,
-        shortUrl: `${BASE_URL}/${newShortUrl.rows[0].short_url}`,
+        shortUrl: `${URL_TO_CALL}/${newShortUrl.rows[0].short_url}`,
       }; //Devuelve la nueva short_url
     } catch (error) {
       console.log("Error in UrlsController.createUrl()", error);
@@ -72,6 +75,24 @@ export class UrlsController {
     } catch (error) {
       console.log("Error in UrlsController.getAll()", error);
       throw error;
+    }
+  }
+  static async getUrlByShortURL(
+    shortURL: string
+  ): Promise<{ status: -1 | 0 | 1; url?: Urls }> {
+    try {
+      const urlQuery = await pool.query(
+        `
+          SELECT * FROM urls
+            WHERE short_url = $1;
+        `,
+        [shortURL]
+      );
+      if (!urlQuery.rowCount) return { status: 0 };
+      return { status: 1, url: urlQuery.rows[0] };
+    } catch (error) {
+      console.log("Error in UrlsController.getUrlByShortURL()", error);
+      return { status: -1 }; //Error
     }
   }
   static async getUrlById(

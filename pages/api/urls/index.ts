@@ -3,8 +3,7 @@ import { UrlsController } from "@/backend/controllers/urls-controller";
 import { Urls } from "@/backend/models/urls";
 type ApiResponse = {
   message?: string;
-  existingUrl?: Urls;
-  newUrl?: Urls;
+  url?: Urls;
   allUrls?: Urls[] | [];
 };
 export default async function handler(
@@ -24,11 +23,12 @@ export default async function handler(
       if (newUrl.status == 0)
         return res.status(200).json({
           message: "The requested url already existed.",
-          existingUrl: newUrl,
+          url: newUrl.shortUrl,
         });
-      return res
-        .status(201)
-        .json({ message: "Url created successfully.", newUrl });
+      return res.status(201).json({
+        message: "Url created successfully.",
+        url: newUrl.shortUrl,
+      });
     }
   } catch (error) {
     console.log("Error in server", error);
