@@ -38,6 +38,7 @@ export default function Home() {
     <main className={styles.main}>
       <h1 className={`${styles.title} ${pressStart2p.className}`}>TEOXYS URL SHORTENER</h1>
       <h3 className={`${styles.subtitle} ${pressStart2p.className}`}>The quickest and coolest, worldwide.</h3>
+      <p>URL que llaman los hooks: {URL_TO_CALL}</p>
       <section className={styles.content}>
         <form onInvalid={handleInvalid} onSubmit={handleSubmit} className={styles.creation_form}>
           <Input
