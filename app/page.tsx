@@ -12,7 +12,8 @@ import { vt323, pressStart2p } from "@/lib/fonts";
 import { Loading, UrlResult } from "@/components";
 /* UI ATOMS */
 import { Input, Button, ArrowIcon, CopyIcon, ExternalIcon } from "@/ui";
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
+// const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
+const BASE_URL = "https://teoxys-url.vercel.app";
 const URL_TO_CALL =
   process.env.NODE_ENV == "production"
     ? BASE_URL
