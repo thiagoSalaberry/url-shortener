@@ -59,6 +59,8 @@ export default function Home() {
       return () => clearTimeout(timer);
     }
   }, [toastPos])
+  console.log(data);
+  
   return (
     <main className={styles.main}>
       <div className={styles.hs_container}>
