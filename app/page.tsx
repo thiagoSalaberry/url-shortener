@@ -85,8 +85,8 @@ export default function Home() {
           {isLoading ? <Loading/> : error ? "Server error occurred" : data ? <span><ArrowIcon size={14} color="#46d21b"/> Here is your shortened URL <ArrowIcon size={14} color="#46d21b"/></span> : null}
         </p>
         <div className={styles.result_container}>
-          <UrlResult result={data && !isLoading ? `${URL_TO_CALL}/${data.url}` : ""}/>
-          <Button ref={copyButtonRef} type="button" style="mainIcon" onClick={(top,left)=>{data && handleCopyClick(`${URL_TO_CALL}/${data.url}`, top!, left!)}}><CopyIcon size={16}/></Button>
+          <UrlResult result={data && !isLoading ? data.url : ""}/>
+          <Button ref={copyButtonRef} type="button" style="mainIcon" onClick={(top,left)=>{data && handleCopyClick(data.url, top!, left!)}}><CopyIcon size={16}/></Button>
           <Button type="button" style="mainIcon" onClick={()=>data && router.push(data?.url)}><ExternalIcon size={20}/></Button>
         </div>
       </section>
