@@ -87,7 +87,8 @@ export default function Home() {
         <div className={styles.result_container}>
           <UrlResult result={data && !isLoading ? data.url : ""}/>
           <Button ref={copyButtonRef} type="button" style="mainIcon" onClick={(top,left)=>{data && handleCopyClick(data.url, top!, left!)}}><CopyIcon size={16}/></Button>
-          <Button type="button" style="mainIcon" onClick={()=>data && router.push(data?.url)}><ExternalIcon size={20}/></Button>
+          {/* <Button type="button" style="mainIcon" onClick={()=>data && router.push(data?.url)}><ExternalIcon size={20}/></Button> */}
+          <Navigation href={data && data.url || ""}><ExternalIcon size={20}/></Navigation>
         </div>
       </section>
       <footer className={styles.sm_container}>

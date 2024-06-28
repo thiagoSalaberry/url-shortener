@@ -7,7 +7,11 @@ type NavigationProps = {
 export function Navigation(props:NavigationProps) {
     return (
         <div className={styles.navigation}>
-            <Link href={props.href} target="_blank">{props.children}</Link>
+            {props.href ? (
+                <Link href={props.href} target="_blank">{props.children}</Link>
+            ) : (
+                props.children
+            )}
         </div>
     )
 }
