@@ -10,7 +10,8 @@
     cursor: pointer;
     text-decoration: none;
     color: #151515;
-    width: fit-content;
+    /* width: fit-content; */
+    text-align: center;
 }
 .navigation:hover {
     transform: translate(2px, -2px);
