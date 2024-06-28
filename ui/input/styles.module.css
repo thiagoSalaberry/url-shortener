@@ -19,3 +19,8 @@
 .input.missing:focus {
     box-shadow: -4px 4px 0 0 rgb(224, 59, 59);
 }
+@media (max-width: 768px) {
+    .input {
+        width: 100%;
+    }
+}

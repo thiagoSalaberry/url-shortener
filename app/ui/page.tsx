@@ -1,15 +1,37 @@
 "use client"
 import styles from "./styles.module.css";
-import { Button } from "@/ui/buttons";
-import { CopyIcon } from "@/ui/icons/copy";
-import { ExternalIcon } from "@/ui/icons/link";
+import { Button, ButtonRef } from "@/ui/buttons";
+import { CopyIcon, ExternalIcon, LinkedInIcon, GithubIcon, Navigation } from "@/ui";
 import { Input } from "@/ui/input";
-import { useState } from "react";
-import { UrlResult } from "@/components/result";
+import { useEffect, useRef, useState } from "react";
+import { UrlResult, Toast } from "@/components";
 export default function Page() {
+    const buttonRef = useRef<ButtonRef>(null)
+    const button2Ref = useRef<ButtonRef>(null)
+    const [toastPos, setToastPos] = useState<{top:number, left:number} | null>(null)
+    const showToast = (top:number, left:number) => {
+        if (buttonRef.current) {
+            buttonRef.current.focus()
+            setToastPos({
+                top,
+                left
+            })
+        }
+    }
+    useEffect(()=>{
+        if(toastPos) {
+            const timer = setTimeout(() => {
+                setToastPos(null)
+            }, 3000);
+            return () => clearTimeout(timer)
+        }
+    }, [toastPos])
     return (
         <main className={styles.ui_page}>
-            <AnimatedText>http://localhost:3000/xMBENA</AnimatedText>
+            <Button type="button" ref={buttonRef} disabled={toastPos ? true : false} onClick={(top, left)=>showToast(top!, left!)} style="main">Main Button</Button>
+            {
+                toastPos && <Toast duration={3000} position={toastPos}>Copied!</Toast>
+            }
         </main>
     )
 }
@@ -22,19 +44,10 @@ const AnimatedText = ({children}:{children:string}) => {
         setTest(value)
     }
     return (
-        <main>
-            <p className={styles.animated_text}>{
-                children.split("").map((char, index) => {
-                    return <span className={`${styles.span} ${index % 2 == 0 ? styles.top : styles.bottom}`} key={index} style={{animationDelay: `${index * 0.1}s`}}>{char}</span>
-                })
-            }</p>
-            <Button type="button" onClick={()=>{}} style="main">Main Button</Button>
-            <Button type="button" onClick={()=>{}} style="secondary">Secondary Button</Button>
-            <Button type="button" onClick={()=>{}} style="mainIcon"><CopyIcon size={16}/></Button>
-            <Button type="button" onClick={()=>{}} style="mainIcon"><ExternalIcon size={20}/></Button>
-            <Button type="button" onClick={()=>{}} style="secondaryIcon">Main Button</Button>
-            <Input type="text" name="test" value={test} missing={missing} disabled={submitting} placeholder="Place your long URL here..." onChange={(value)=>handleChange(value)}/>
-            <UrlResult result="http://localhost:3000/xMBENA"/>
-        </main>
+        <p className={styles.animated_text}>{
+            children.split("").map((char, index) => {
+                return <span className={`${styles.span} ${index % 2 == 0 ? styles.top : styles.bottom}`} key={index} style={{animationDelay: `${index * 0.1}s`}}>{char}</span>
+            })
+        }</p>            
     )
 } 
