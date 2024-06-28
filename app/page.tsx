@@ -10,7 +10,7 @@ import { vt323, pressStart2p } from "@/lib/fonts";
 /* COMPONENTS */
 import { Loading, UrlResult, Toast } from "@/components";
 /* UI ATOMS */
-import { Input, Button, ArrowIcon, CopyIcon, ExternalIcon, GithubIcon, LinkedInIcon, Navigation } from "@/ui";
+import { Input, Button, ArrowIcon, CopyIcon, ExternalIcon, GithubIcon, LinkedInIcon, CutIcon, Navigation } from "@/ui";
 import { ButtonRef } from "@/ui/buttons";
 import { useEffect, useRef, useState } from "react";
 const BASE_URL = "https://teoxys-url.vercel.app";
@@ -22,6 +22,7 @@ export default function Home() {
   const {longUrl, setLongUrl, missing, setMissing, submitting, setSubmitting} = useForm()
   const {isLoading, error, data, createUrl} = useCreateUrl();
   const [toastPos, setToastPos] = useState<{top:number, left:number} | null>(null)
+  const [iconsSize, setIconsSize] = useState<"small" | "large">("large");
   const copyButtonRef = useRef<ButtonRef>(null)
   const handleSubmit = async (e:React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -49,6 +50,18 @@ export default function Home() {
     showToast(top, left)
   }
   useEffect(()=>{
+    const handleResize = () => {
+        if(window.innerWidth >= 768) {
+            setIconsSize("large")
+        } else {
+            setIconsSize("small")
+        }
+    }
+    handleResize();
+    window.addEventListener("resize", handleResize)
+    return ()=> window.removeEventListener("resize", handleResize)
+}, [])
+  useEffect(()=>{
     if(toastPos) {
       const timer = setTimeout(() => {
         setToastPos(null)
@@ -73,8 +86,12 @@ export default function Home() {
             required={true}
             missing={missing}
             disabled={submitting}
-            />
-          <Button onClick={()=>handleSubmit} type="submit" style="main" disabled={submitting}>Shorten URL</Button>
+          />
+          {iconsSize == "large" ? (
+            <Button onClick={()=>handleSubmit} type="submit" style="main" disabled={submitting}>Shorten URL</Button>
+          ) : (
+            <Button onClick={()=>handleSubmit} type="submit" style="mainIcon" disabled={submitting}><CutIcon size={14}/></Button>
+          )}
         </form>
         <p className={`${styles.info_message} ${isLoading && styles.loading} ${missing && styles.missing} ${error && styles.error} ${data && !isLoading && styles.success} ${vt323.className}`}>
           {isLoading ? <Loading/> : error ? "Server error occurred" : data ? <span><ArrowIcon size={14} color="#46d21b"/> Here is your shortened URL <ArrowIcon size={14} color="#46d21b"/></span> : null}
@@ -82,13 +99,13 @@ export default function Home() {
         <div className={styles.result_container}>
           <UrlResult result={data && !isLoading ? data.url : ""}/>
           <Button ref={copyButtonRef} type="button" style="mainIcon" onClick={(top,left)=>{data && handleCopyClick(data.url, top!, left!)}}><CopyIcon size={16}/></Button>
-          <Navigation href={data && data.url || ""}><ExternalIcon size={20}/></Navigation>
+          <Navigation href={data && data.url || ""}><ExternalIcon size={iconsSize == "large" ? 20 : 14}/></Navigation>
         </div>
       </section>
       <footer className={styles.sm_container}>
         <p className={styles.made_by}>Made by: Thiago Salaberry</p>
-          <Navigation href="https://github.com/thiagoSalaberry"><GithubIcon size={20}/></Navigation>
-          <Navigation href="https://www.linkedin.com/in/thiago-salaberry/"><LinkedInIcon size={20}/></Navigation>
+          <Navigation href="https://github.com/thiagoSalaberry"><GithubIcon size={iconsSize == "large" ? 20 : 14}/></Navigation>
+          <Navigation href="https://www.linkedin.com/in/thiago-salaberry/"><LinkedInIcon size={iconsSize == "large" ? 20 : 14}/></Navigation>
       </footer>
       {toastPos && (
         <Toast duration={3000} position={toastPos}>Copied!</Toast>

@@ -5,6 +5,7 @@ import { ArrowIcon } from "./icons/arrow";
 import { ExternalIcon } from "./icons/link";
 import { GithubIcon } from "./icons/github";
 import { LinkedInIcon } from "./icons/linkedin";
+import { CutIcon } from "./icons/cut";
 import { Navigation } from "./navigation";
 export {
   Button,
@@ -14,5 +15,6 @@ export {
   ArrowIcon,
   CopyIcon,
   ExternalIcon,
+  CutIcon,
   Navigation,
 };

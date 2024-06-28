@@ -20,6 +20,7 @@ const MainBtnStyled = styled.button`
     font-size: 26px;
     font-weight: 400;
     transition: all .15s;
+    white-space: nowrap;
     cursor: pointer;
     &:hover {
         transform: translate(2px, -2px);
@@ -44,9 +45,12 @@ const MainIconBtnStyled = styled(MainBtnStyled)`
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 100%;
     @media (max-width: 768px) {
         & {
             padding: 5px;
+            width: 46px;
+            height: 36px;
         }
     }
 `

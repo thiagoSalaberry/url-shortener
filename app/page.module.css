@@ -14,20 +14,21 @@
 }
 .subtitle {
   font-size: 24px;
+  text-align: center;
 }
 .content {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  width: 100%;
 }
 .creation_form {
-  display: flex;
+  display: grid;
+  grid-template-columns: 600px 1fr;
   gap: 10px;
 }
 .result_container {
   display: grid;
-  grid-template-columns: 1fr auto auto;
+  grid-template-columns: 600px 1fr 1fr;
   gap: 10px;
 }
 .info_message {
@@ -83,6 +84,15 @@
     font-size: 16px;
     line-height: 22px;
     text-align: center;
+  }
+  .creation_form {
+    display: flex;
+  }
+  .result_container {
+    display: flex;
+  }
+  .content {
+    width: 100%;
   }
   .info_message {
     font-size: 14px;
