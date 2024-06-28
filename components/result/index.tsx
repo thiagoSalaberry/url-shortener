@@ -1,8 +1,6 @@
 import styles from "./styles.module.css"
 import { vt323 } from "@/lib/fonts"
 export function UrlResult({result}: {result?:string}) {
-    console.log("Esto viene del result: ", result);
-    
     return (
         <div className={styles.result_container}>
             <p className={`${styles.result} ${vt323.className}`}>

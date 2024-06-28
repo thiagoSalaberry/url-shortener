@@ -1,7 +1,6 @@
 "use client";
 import styles from "./page.module.css";
 /* HOOKS */
-import { useRouter } from "next/navigation";
 import { useForm } from "@/lib/hooks/useForm";
 import { useCreateUrl } from "@/lib/hooks/useCreateUrl";
 /* UTILITIES */
@@ -14,7 +13,6 @@ import { Loading, UrlResult, Toast } from "@/components";
 import { Input, Button, ArrowIcon, CopyIcon, ExternalIcon, GithubIcon, LinkedInIcon, Navigation } from "@/ui";
 import { ButtonRef } from "@/ui/buttons";
 import { useEffect, useRef, useState } from "react";
-// const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 const BASE_URL = "https://teoxys-url.vercel.app";
 const URL_TO_CALL =
   process.env.NODE_ENV == "production"
@@ -25,7 +23,6 @@ export default function Home() {
   const {isLoading, error, data, createUrl} = useCreateUrl();
   const [toastPos, setToastPos] = useState<{top:number, left:number} | null>(null)
   const copyButtonRef = useRef<ButtonRef>(null)
-  const router = useRouter()
   const handleSubmit = async (e:React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     createUrl(longUrl)
@@ -59,8 +56,6 @@ export default function Home() {
       return () => clearTimeout(timer);
     }
   }, [toastPos])
-  console.log(data);
-  
   return (
     <main className={styles.main}>
       <div className={styles.hs_container}>
@@ -87,7 +82,6 @@ export default function Home() {
         <div className={styles.result_container}>
           <UrlResult result={data && !isLoading ? data.url : ""}/>
           <Button ref={copyButtonRef} type="button" style="mainIcon" onClick={(top,left)=>{data && handleCopyClick(data.url, top!, left!)}}><CopyIcon size={16}/></Button>
-          {/* <Button type="button" style="mainIcon" onClick={()=>data && router.push(data?.url)}><ExternalIcon size={20}/></Button> */}
           <Navigation href={data && data.url || ""}><ExternalIcon size={20}/></Navigation>
         </div>
       </section>
