@@ -35,7 +35,10 @@ export class UrlsController {
         [original_url]
       );
       if (exists.rowCount)
-        return { status: 0, shortUrl: exists.rows[0].short_url }; //La url original ya existía
+        return {
+          status: 0,
+          shortUrl: `${URL_TO_CALL}/${exists.rows[0].short_url}`,
+        }; //La url original ya existía
       let shortUrl: string = "";
       do {
         shortUrl = generateRandomURL();
