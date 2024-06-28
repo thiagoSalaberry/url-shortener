@@ -22,7 +22,7 @@ export default function Page() {
             {isLoading ? <Loading text="Redirecting"/> : error ? (
                 <>
                     <p className={styles.message}>Server error ocurred.</p>
-                    <Button type="button" style="main" onClick={()=>router.back()}>Go back</Button>
+                    <Button type="button" style="main" onClick={()=>router.push("/")}>Go home</Button>
                 </>
             ) : null}
         </main>

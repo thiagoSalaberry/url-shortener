@@ -1,12 +1,15 @@
 import styled from "styled-components";
 import { vt323 } from "@/lib/fonts";
-
+import { forwardRef, useImperativeHandle, useRef } from "react";
 type ButtonProps = {
     style:"main" | "secondary" | "mainIcon" | "secondaryIcon";
     type: "button" | "submit";
     children: React.ReactNode;
     disabled?: boolean;
-    onClick: () => void;
+    onClick: (top?:number, left?:number) => void;
+}
+export type ButtonRef = {
+    focus: () => void
 }
 const MainBtnStyled = styled.button`
     background: #f09274;
@@ -41,17 +44,48 @@ const SecondaryIconBtnStyled = styled(SecondaryBtnStyled)`
     justify-content: center;
     align-items: center;
 `
-export function Button(props:ButtonProps) {
+// export function Button(props:ButtonProps) {
+//     switch (props.style) {
+//         case "main":
+//             return <MainBtnStyled onClick={props.onClick} type={props.type} className={vt323.className}>{props.children}</MainBtnStyled>;
+//         case "secondary": 
+//             return <SecondaryBtnStyled onClick={props.onClick} type={props.type} className={vt323.className}>{props.children}</SecondaryBtnStyled>;
+//         case "mainIcon":
+//             return <MainIconBtnStyled onClick={props.onClick} type={props.type} className={vt323.className}>{props.children}</MainIconBtnStyled>;
+//         case "secondaryIcon":
+//             return <SecondaryIconBtnStyled onClick={props.onClick} type={props.type} className={vt323.className}>{props.children}</SecondaryIconBtnStyled>;
+//         default:
+//             return <MainBtnStyled onClick={props.onClick} type={props.type} className={vt323.className}>{props.children}</MainBtnStyled>;
+//     }
+// }
+export const Button = forwardRef<ButtonRef, ButtonProps>((props, ref) => {
+    const buttonRef = useRef<HTMLButtonElement>(null);
+    useImperativeHandle(ref, () => ({
+        focus: () => {
+            if (buttonRef.current) {
+                buttonRef.current.focus();
+            }
+        }
+    }))
+    const handleClick = (e:React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+        if(buttonRef.current) {
+            const rect = buttonRef.current.getBoundingClientRect();
+            const left = rect.left + rect.width / 2;
+            const top = rect.bottom + 5;
+            props.onClick(top, left)
+        }
+    }
     switch (props.style) {
         case "main":
-            return <MainBtnStyled onClick={props.onClick} type={props.type} className={vt323.className}>{props.children}</MainBtnStyled>;
+            return <MainBtnStyled ref={buttonRef} onClick={handleClick} type={props.type} className={vt323.className}>{props.children}</MainBtnStyled>;
         case "secondary": 
-            return <SecondaryBtnStyled onClick={props.onClick} type={props.type} className={vt323.className}>{props.children}</SecondaryBtnStyled>;
+            return <SecondaryBtnStyled ref={buttonRef} onClick={handleClick} type={props.type} className={vt323.className}>{props.children}</SecondaryBtnStyled>;
         case "mainIcon":
-            return <MainIconBtnStyled onClick={props.onClick} type={props.type} className={vt323.className}>{props.children}</MainIconBtnStyled>;
+            return <MainIconBtnStyled ref={buttonRef} onClick={handleClick} type={props.type} className={vt323.className}>{props.children}</MainIconBtnStyled>;
         case "secondaryIcon":
-            return <SecondaryIconBtnStyled onClick={props.onClick} type={props.type} className={vt323.className}>{props.children}</SecondaryIconBtnStyled>;
+            return <SecondaryIconBtnStyled ref={buttonRef} onClick={handleClick} type={props.type} className={vt323.className}>{props.children}</SecondaryIconBtnStyled>;
         default:
-            return <MainBtnStyled onClick={props.onClick} type={props.type} className={vt323.className}>{props.children}</MainBtnStyled>;
+            return <MainBtnStyled ref={buttonRef} onClick={handleClick} type={props.type} className={vt323.className}>{props.children}</MainBtnStyled>;
     }
-}
+})
+
