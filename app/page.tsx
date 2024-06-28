@@ -98,7 +98,7 @@ export default function Home() {
         </p>
         <div className={styles.result_container}>
           <UrlResult result={data && !isLoading ? data.url : ""}/>
-          <Button ref={copyButtonRef} type="button" style="mainIcon" onClick={(top,left)=>{data && handleCopyClick(data.url, top!, left!)}}><CopyIcon size={16}/></Button>
+          <Button ref={copyButtonRef} type="button" style="mainIcon" onClick={(top,left)=>{data && handleCopyClick(data.url, top!, left!)}}><CopyIcon size={iconsSize == "large" ? 16 : 12}/></Button>
           <Navigation href={data && data.url || ""}><ExternalIcon size={iconsSize == "large" ? 20 : 14}/></Navigation>
         </div>
       </section>
