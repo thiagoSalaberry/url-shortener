@@ -16,14 +16,15 @@ const MainBtnStyled = styled.button`
     border-radius: 5px;
     font-size: 26px;
     font-weight: 400;
-    transition: all .2s;
+    transition: all .15s;
     cursor: pointer;
     &:hover {
         transform: translate(2px, -2px);
         box-shadow: -4px 4px rgb(15,15,15);
     }
     &:active {
-        transform: translate(0px,0px);
+        /* box-shadow: -2px 2px 0 0 rgb(15,15,15); */
+        transform: translate(-2px, 2px);
         box-shadow: none;
     }
 `
@@ -36,7 +37,9 @@ const MainIconBtnStyled = styled(MainBtnStyled)`
     align-items: center;
 `
 const SecondaryIconBtnStyled = styled(SecondaryBtnStyled)`
-    
+    display: flex;
+    justify-content: center;
+    align-items: center;
 `
 export function Button(props:ButtonProps) {
     switch (props.style) {

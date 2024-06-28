@@ -1,0 +1,12 @@
+type IconProps = {
+    size:number;
+    color?:string
+    className?:string;
+}
+export function GithubIcon(props:IconProps) {
+    return (
+        <svg width={props.size} height={props.size} viewBox="0 0 20 20" fill={props.color || "black"} xmlns="http://www.w3.org/2000/svg">
+            <path d="M4 0H8V2H6V4H4V0ZM4 10H2V4H4V10ZM6 12H4V10H6V12ZM8 14V12H6V14H2V12H0V14H2V16H6V20H8V16H10V14H8ZM8 14V16H6V14H8ZM14 2V4H8V2H14ZM18 4H16V2H14V0H18V4ZM18 10V4H20V10H18ZM16 12V10H18V12H16ZM14 14V12H16V14H14ZM14 16H12V14H14V16ZM14 16H16V20H14V16Z" fill={props.color || "black"}/>
+        </svg>
+    )
+}

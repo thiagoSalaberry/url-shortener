@@ -1,8 +1,7 @@
 "use client"
 import styles from "./styles.module.css";
 import { Button } from "@/ui/buttons";
-import { CopyIcon } from "@/ui/icons/copy";
-import { ExternalIcon } from "@/ui/icons/link";
+import { CopyIcon, ExternalIcon, LinkedInIcon, GithubIcon, Navigation } from "@/ui";
 import { Input } from "@/ui/input";
 import { useState } from "react";
 import { UrlResult } from "@/components/result";
@@ -30,11 +29,14 @@ const AnimatedText = ({children}:{children:string}) => {
             }</p>
             <Button type="button" onClick={()=>{}} style="main">Main Button</Button>
             <Button type="button" onClick={()=>{}} style="secondary">Secondary Button</Button>
-            <Button type="button" onClick={()=>{}} style="mainIcon"><CopyIcon size={16}/></Button>
+            {/* <Button type="button" onClick={()=>{}} style="mainIcon"><CopyIcon size={16}/></Button>
             <Button type="button" onClick={()=>{}} style="mainIcon"><ExternalIcon size={20}/></Button>
+            <Button type="button" onClick={()=>{}} style="mainIcon"><GithubIcon size={20}/></Button>
+            <Button type="button" onClick={()=>{}} style="mainIcon"><LinkedInIcon size={13}/></Button>
             <Button type="button" onClick={()=>{}} style="secondaryIcon">Main Button</Button>
             <Input type="text" name="test" value={test} missing={missing} disabled={submitting} placeholder="Place your long URL here..." onChange={(value)=>handleChange(value)}/>
-            <UrlResult result="http://localhost:3000/xMBENA"/>
+            <UrlResult result="http://localhost:3000/xMBENA"/> */}
+            <Navigation href="https://github.com/thiagoSalaberry"><GithubIcon size={20}/></Navigation>
         </main>
     )
 } 

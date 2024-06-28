@@ -11,7 +11,7 @@ import { vt323, pressStart2p } from "@/lib/fonts";
 /* COMPONENTS */
 import { Loading, UrlResult } from "@/components";
 /* UI ATOMS */
-import { Input, Button, ArrowIcon, CopyIcon, ExternalIcon } from "@/ui";
+import { Input, Button, ArrowIcon, CopyIcon, ExternalIcon, GithubIcon, LinkedInIcon, Navigation } from "@/ui";
 // const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 const BASE_URL = "https://teoxys-url.vercel.app";
 const URL_TO_CALL =
@@ -34,11 +34,13 @@ export default function Home() {
     setLongUrl(value)
     setMissing(false)
   }
+  
   return (
     <main className={styles.main}>
-      <h1 className={`${styles.title} ${pressStart2p.className}`}>TEOXYS URL SHORTENER</h1>
-      <h3 className={`${styles.subtitle} ${pressStart2p.className}`}>The quickest and coolest, worldwide.</h3>
-      <p>URL que llaman los hooks: {URL_TO_CALL}</p>
+      <div className={styles.hs_container}>
+        <h1 className={`${styles.title} ${pressStart2p.className}`}>TEOXYS URL<br/> SHORTENER</h1>
+        <h3 className={`${styles.subtitle} ${pressStart2p.className}`}>The quickest and coolest, worldwide.</h3>
+      </div>
       <section className={styles.content}>
         <form onInvalid={handleInvalid} onSubmit={handleSubmit} className={styles.creation_form}>
           <Input
@@ -57,11 +59,16 @@ export default function Home() {
           {isLoading ? <Loading/> : error ? "Server error occurred" : data ? <span><ArrowIcon size={14} color="#46d21b"/> Here is your shortened URL <ArrowIcon size={14} color="#46d21b"/></span> : null}
         </p>
         <div className={styles.result_container}>
-          <UrlResult result={data && !isLoading ? data.url : ""}/>
+          <UrlResult result={data && !isLoading ? `${URL_TO_CALL}/${data.url}` : ""}/>
           <Button type="button" style="mainIcon" onClick={()=>{data && copy(`${URL_TO_CALL}/${data.url}`)}}><CopyIcon size={16}/></Button>
           <Button type="button" style="mainIcon" onClick={()=>data && router.push(data?.url)}><ExternalIcon size={20}/></Button>
         </div>
       </section>
+      <footer className={styles.sm_container}>
+        <p className={styles.made_by}>Made by: Thiago Salaberry</p>
+          <Navigation href="https://github.com/thiagoSalaberry"><GithubIcon size={20}/></Navigation>
+          <Navigation href="https://www.linkedin.com/in/thiago-salaberry/"><LinkedInIcon size={20}/></Navigation>
+      </footer>
     </main>
   );
 }
