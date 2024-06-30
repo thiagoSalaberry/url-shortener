@@ -21,3 +21,14 @@
     transform: translate(-2px, 2px);
     box-shadow: none;
 }
+
+@media (max-width: 768px) {
+    .navigation {
+        padding: 5px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 46px;
+        height: 36px;
+    }
+}

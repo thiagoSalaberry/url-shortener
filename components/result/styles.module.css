@@ -1,5 +1,5 @@
 .result_container {
-    width: 600px;
+    width: 100%;
     height: 46px;
     padding: 0 20px;
     border: 2px solid rgb(15, 15, 15);
@@ -41,4 +41,15 @@
 .bottom {
     transform: translateY(120%);
     animation: bottom .1s forwards;
+}
+
+@media (max-width: 768px) {
+    .result_container {
+        width: 100%;
+        height: 34px;
+    }
+    .result {
+        font-size: 14px;
+
+    }
 }

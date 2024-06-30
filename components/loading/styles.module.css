@@ -20,3 +20,8 @@
 .dot:last-child {
     animation-delay: .4s;
 }
+@media (max-width: 768px) {
+    .loading {
+        font-size: 14px;
+    }
+}

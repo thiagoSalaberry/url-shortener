@@ -20,6 +20,7 @@ const MainBtnStyled = styled.button`
     font-size: 26px;
     font-weight: 400;
     transition: all .15s;
+    white-space: nowrap;
     cursor: pointer;
     &:hover {
         transform: translate(2px, -2px);
@@ -30,6 +31,12 @@ const MainBtnStyled = styled.button`
         transform: translate(-2px, 2px);
         box-shadow: none;
     }
+    @media (max-width: 768px) {
+        & {
+            font-size: 14px;
+            white-space: nowrap;
+        }
+    }
 `
 const SecondaryBtnStyled = styled(MainBtnStyled)`
     background: none;
@@ -38,26 +45,20 @@ const MainIconBtnStyled = styled(MainBtnStyled)`
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 100%;
+    @media (max-width: 768px) {
+        & {
+            padding: 5px;
+            width: 46px;
+            height: 36px;
+        }
+    }
 `
 const SecondaryIconBtnStyled = styled(SecondaryBtnStyled)`
     display: flex;
     justify-content: center;
     align-items: center;
 `
-// export function Button(props:ButtonProps) {
-//     switch (props.style) {
-//         case "main":
-//             return <MainBtnStyled onClick={props.onClick} type={props.type} className={vt323.className}>{props.children}</MainBtnStyled>;
-//         case "secondary": 
-//             return <SecondaryBtnStyled onClick={props.onClick} type={props.type} className={vt323.className}>{props.children}</SecondaryBtnStyled>;
-//         case "mainIcon":
-//             return <MainIconBtnStyled onClick={props.onClick} type={props.type} className={vt323.className}>{props.children}</MainIconBtnStyled>;
-//         case "secondaryIcon":
-//             return <SecondaryIconBtnStyled onClick={props.onClick} type={props.type} className={vt323.className}>{props.children}</SecondaryIconBtnStyled>;
-//         default:
-//             return <MainBtnStyled onClick={props.onClick} type={props.type} className={vt323.className}>{props.children}</MainBtnStyled>;
-//     }
-// }
 export const Button = forwardRef<ButtonRef, ButtonProps>((props, ref) => {
     const buttonRef = useRef<HTMLButtonElement>(null);
     useImperativeHandle(ref, () => ({

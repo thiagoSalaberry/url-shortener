@@ -7,7 +7,7 @@ import { useEffect, useRef, useState } from "react";
 import { UrlResult, Toast } from "@/components";
 export default function Page() {
     const buttonRef = useRef<ButtonRef>(null)
-    const button2Ref = useRef<ButtonRef>(null)
+    const [iconsSize, setIconsSize] = useState<"small" | "large">("large");
     const [toastPos, setToastPos] = useState<{top:number, left:number} | null>(null)
     const showToast = (top:number, left:number) => {
         if (buttonRef.current) {
@@ -18,6 +18,18 @@ export default function Page() {
             })
         }
     }
+    useEffect(()=>{
+        const handleResize = () => {
+            if(window.innerWidth >= 768) {
+                setIconsSize("large")
+            } else {
+                setIconsSize("small")
+            }
+        }
+        handleResize();
+        window.addEventListener("resize", handleResize)
+        return ()=> window.removeEventListener("resize", handleResize)
+    }, [])
     useEffect(()=>{
         if(toastPos) {
             const timer = setTimeout(() => {
@@ -32,6 +44,8 @@ export default function Page() {
             {
                 toastPos && <Toast duration={3000} position={toastPos}>Copied!</Toast>
             }
+            <p>{iconsSize}</p>
+            <Button type="button" onClick={()=>{}} style="mainIcon"><GithubIcon size={iconsSize == "large" ? 20 : 14}/></Button>
         </main>
     )
 }

@@ -1,6 +1,6 @@
 .input {
     font-size: 26px;
-    width: 600px;
+    width: 100%;
     border: 2px solid rgb(15, 15, 15);
     border-radius: 5px;
     padding: 8px 20px;
@@ -19,8 +19,10 @@
 .input.missing:focus {
     box-shadow: -4px 4px 0 0 rgb(224, 59, 59);
 }
+/* MOBILE */
 @media (max-width: 768px) {
     .input {
         width: 100%;
+        font-size: 14px;
     }
 }
